@@ -36,6 +36,7 @@ namespace GairaMare.API.Controllers
                     ProductId = p.ProductId,
                     Name = p.Name,
                     Price = p.Price,
+                    ImageUrl = p.ImageUrl,
                     TotalStock = _context.Inventory.Count(i => i.ProductId == p.ProductId && i.Status == "In Stock")
                 })
                 .ToListAsync();

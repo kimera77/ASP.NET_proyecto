@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GaiaMare.Infrastructure\GaiaMare.Infrastructure.csproj" />
+    <ProjectReference Include="..\GaiaMare.Application\GaiaMare.Application.csproj" />
   </ItemGroup>
 
 </Project>

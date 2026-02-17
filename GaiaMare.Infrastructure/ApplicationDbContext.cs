@@ -20,9 +20,20 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Configuración de precisión decimal para Product
         // Esto le dice a SQL que use 18 dígitos en total y 2 decimales
-        modelBuilder.Entity<Product>().Property(p => p.Width).HasColumnType("decimal(18,2)");
-        modelBuilder.Entity<Product>().Property(p => p.Height).HasColumnType("decimal(18,2)");
-        modelBuilder.Entity<Product>().Property(p => p.Price).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Width).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Height).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Price).HasColumnType("decimal(18,2)");
+
+        // Configuración de precisión decimal para Sale
+        // Importante para evitar errores de redondeo en precios y descuentos
+        modelBuilder.Entity<Sale>()
+            .Property(s => s.FinalPrice).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Sale>()
+            .Property(s => s.DiscountApplied).HasColumnType("decimal(18,2)");
     }
 }

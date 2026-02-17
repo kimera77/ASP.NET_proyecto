@@ -3,6 +3,7 @@
     <File Path="BBDD/TablasCreacion.sql" />
   </Folder>
   <Project Path="GaiaMare.API/GaiaMare.API.csproj" Id="ab7377d4-4e9d-4b2a-aee8-557a457c1c63" />
+  <Project Path="GaiaMare.Application/GaiaMare.Application.csproj" />
   <Project Path="GaiaMare.Domain/GaiaMare.Domain.csproj" Id="4c9af526-61c5-46bf-8e9a-f815fb833861" />
   <Project Path="GaiaMare.Infrastructure/GaiaMare.Infrastructure.csproj" Id="91751386-1702-4553-9052-46cb238cae7e" />
 </Solution>

@@ -19,6 +19,7 @@ CREATE TABLE Products (
     Price DECIMAL(18,2),
     InsideTexture NVARCHAR(100),
     InsideColor NVARCHAR(50),
+    ImageUrl NVARCHAR(500),
     CreatedAt DATETIME DEFAULT GETDATE()
 );
 

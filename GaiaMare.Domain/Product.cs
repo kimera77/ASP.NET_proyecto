@@ -15,6 +15,7 @@ public class Product
     public decimal? Width { get; set; }
     public string? InsideTexture { get; set; }
     public string? InsideColor { get; set; }
+    public string? ImageUrl { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 }

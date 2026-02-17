@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GaiaMare.Domain\GaiaMare.Domain.csproj" />
+    <ProjectReference Include="..\GaiaMare.Infrastructure\GaiaMare.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
