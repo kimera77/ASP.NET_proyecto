@@ -27,6 +27,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Product>()
             .Property(p => p.Height).HasColumnType("decimal(18,2)");
         modelBuilder.Entity<Product>()
+            .Property(p => p.BasePrice).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Product>()
             .Property(p => p.Price).HasColumnType("decimal(18,2)");
 
         // Configuración de precisión decimal para Sale

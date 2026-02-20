@@ -1,4 +1,5 @@
-﻿using GaiaMare.Infrastructure;
+﻿using GaiaMare.Domain;
+using GaiaMare.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace GaiaMare.Application
@@ -15,11 +16,11 @@ namespace GaiaMare.Application
         }
 
         // Verifica si un producto tiene stock disponible
-        // Retorna true si existe al menos un ítem "In Stock" para ese producto
+        // Retorna true si existe al menos un ítem "Stock" para ese producto
         public async Task<bool> HasStock(int productId)
         {
             return await _context.Inventory
-                .AnyAsync(i => i.ProductId == productId && i.Status == "In Stock");
+                .AnyAsync(i => i.ProductId == productId && i.Status == "Stock");
         }
 
         // Calcula el stock disponible de un producto específico
@@ -27,7 +28,7 @@ namespace GaiaMare.Application
         public async Task<int> GetAvailableStock(int productId)
         {
             return await _context.Inventory
-                .CountAsync(i => i.ProductId == productId && i.Status == "In Stock");
+                .CountAsync(i => i.ProductId == productId && i.Status == "Stock");
         }
 
         // Calcula el precio promedio de una colección
@@ -61,6 +62,44 @@ namespace GaiaMare.Application
             }
 
             return lowStock;
+        }
+
+        // Crea un nuevo producto a partir de un DTO
+        public async Task<Product> AddProductAsync(ProductCreateDto dto)
+        {
+            var product = new Product
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                BasePrice = dto.BasePrice,
+                Price = dto.Price > 0 ? dto.Price : dto.BasePrice, // Si no se proporciona Price, usa BasePrice
+                Color = dto.Color,
+                Material = dto.Material,
+                Size = dto.Size,
+                Closure = dto.Closure,
+                Collection = dto.Collection,
+                Height = dto.Height,
+                Width = dto.Width,
+                InsideTexture = dto.InsideTexture,
+                InsideColor = dto.InsideColor,
+                ImageUrl = dto.ImageUrl,
+                CreatedAt = DateTime.Now
+            };
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            // Crear automáticamente un ítem de inventario para el nuevo producto
+            var inventoryItem = new Inventory
+            {
+                ProductId = product.ProductId,
+                SKU = $"GAIA-{product.ProductId:D4}-{DateTime.Now:yyyyMMddHHmmss}",
+                Status = "Stock",
+                ArrivalDate = DateTime.Now
+            };
+            _context.Inventory.Add(inventoryItem);
+            await _context.SaveChangesAsync();
+
+            return product;
         }
     }
 }

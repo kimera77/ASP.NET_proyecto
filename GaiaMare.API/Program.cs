@@ -22,7 +22,12 @@ builder.Services.AddDbContext<GaiaMare.Infrastructure.ApplicationDbContext>(opti
 builder.Services.AddScoped<GaiaMare.Application.ProductService>();
 
 // Registra los controladores de la API (ProductsController, InventoryController, SalesController)
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configura el serializador JSON para usar camelCase (estándar JavaScript)
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
 
 // Habilita la documentación automática de endpoints para herramientas como Swagger
 builder.Services.AddEndpointsApiExplorer();

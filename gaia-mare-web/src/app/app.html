@@ -1,0 +1,23 @@
+<div class="flex h-screen overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar [isOpen]="sidebarOpen" (closeSidebar)="sidebarOpen = false"></app-sidebar>
+
+  <!-- Contenido principal -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- Top bar para móvil -->
+    <header class="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3">
+      <button (click)="toggleSidebar()" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <span class="font-bold text-gray-900">GaiaMare</span>
+    </header>
+
+    <!-- Área de contenido con scroll -->
+    <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+      <router-outlet />
+    </main>
+  </div>
+</div>
